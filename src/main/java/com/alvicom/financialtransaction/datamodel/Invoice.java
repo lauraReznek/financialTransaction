@@ -2,6 +2,7 @@ package com.alvicom.financialtransaction.datamodel;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Optional;
 
 public class Invoice {
     private String invoiceNumber;
@@ -34,7 +35,9 @@ public class Invoice {
     }
 
     public static Map<String, Invoice> getInvoices() {
-        if (invoices == null) {
+        Optional<Map<String, Invoice>> invoicesVariable = Optional.ofNullable(invoices);
+
+        if (!invoicesVariable.isPresent()) {
             invoices = new HashMap<>();
 
             invoices.put("11111111-22222222", new Invoice("11111111-22222222", "HUF", 150000));
@@ -45,9 +48,12 @@ public class Invoice {
     }
 
     public static Map<String, Invoice> getCalculatedInvoices() {
-        if (calculatedInvoices == null) {
+        Optional<Map<String, Invoice>> calculatedInvoicesVariable = Optional.ofNullable(calculatedInvoices);
+
+        if (!calculatedInvoicesVariable.isPresent()) {
             calculatedInvoices = new HashMap<>();
         }
+
         return calculatedInvoices;
     }
 
