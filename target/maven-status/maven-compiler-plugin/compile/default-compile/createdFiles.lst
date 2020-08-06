@@ -1,0 +1,4 @@
+com\alvicom\financialtransaction\datamodel\Invoice.class
+com\alvicom\financialtransaction\util\IOUtil.class
+com\alvicom\financialtransaction\ExecuteFinancialTransaction.class
+com\alvicom\financialtransaction\datamodel\TransactionMessage.class
