@@ -10,10 +10,13 @@ import java.util.stream.Stream;
 
 public class IOUtil {
 
-    public static List<String> getFileContentAsList(String pathtoFile) {
+    private IOUtil() {
+    }
+
+    public static List<String> getFileContentAsList(String pathToFile) {
         List<String> linesInArray = new ArrayList<>();
 
-        Path path = Paths.get(pathtoFile);
+        Path path = Paths.get(pathToFile);
 
         try (Stream<String> fileAsStream = Files.lines(path)) {
             fileAsStream.forEach(aLine -> {
