@@ -4,6 +4,7 @@ import java.util.*;
 import java.util.concurrent.atomic.AtomicInteger;
 
 public class TransactionMessage {
+    private static final String NULL = "null";
     private static AtomicInteger atomic = new AtomicInteger(0);
 
     private String invoiceNumber;
@@ -38,29 +39,33 @@ public class TransactionMessage {
         List<TransactionMessage> transactionMessages = new ArrayList<>();
 
         for (String aTransaction : transactionsFromCsv) {
-            String[] transactionFields = aTransaction.split(";");
-
-            String balance = transactionFields[2];
-            String exchangeRate = transactionFields[3];
-
-            if (!balance.equals("null") && !(exchangeRate.equals("null"))
-                    && balance.length() > 0 && exchangeRate.length() > 0) {
-
-                parseNumericValues(transactionMessages, aTransaction, transactionFields, balance, exchangeRate);
-
-            } else {
-                System.out.println("Invalid transaction message! " + aTransaction);
-            }
+            validateTransactionMessage(transactionMessages, aTransaction);
         }
 
         return transactionMessages;
     }
 
+    private static void validateTransactionMessage(List<TransactionMessage> transactionMessages, String aTransaction) {
+        String[] transactionFields = aTransaction.split(";");
+
+        String balance = transactionFields[2];
+        String exchangeRate = transactionFields[3];
+
+        if (!balance.equals(NULL) && !(exchangeRate.equals(NULL))
+                && balance.length() > 0 && exchangeRate.length() > 0) {
+
+            parseNumericValues(transactionMessages, aTransaction, transactionFields, balance, exchangeRate);
+
+        } else {
+            System.out.println("Invalid transaction message! " + aTransaction);
+        }
+    }
+
     private static void parseNumericValues(List<TransactionMessage> transactionMessages, String aTransaction,
                                            String[] transactionFields, String balance, String exchangeRate) {
         try {
-            double balanceDouble = Double.valueOf(balance);
-            double exchangeRateDouble = Double.valueOf(exchangeRate);
+            double balanceDouble = Double.parseDouble(balance);
+            double exchangeRateDouble = Double.parseDouble(exchangeRate);
 
             transactionMessages.add(new TransactionMessage(transactionFields[0], transactionFields[1],
                     balanceDouble, exchangeRateDouble));
