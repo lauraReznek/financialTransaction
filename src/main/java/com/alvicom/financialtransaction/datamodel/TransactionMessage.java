@@ -5,7 +5,6 @@ import java.util.concurrent.atomic.AtomicInteger;
 
 public class TransactionMessage {
     private static AtomicInteger atomic = new AtomicInteger(0);
-    private static List<String> transactionsFromCsv;
 
     private String invoiceNumber;
     private String currency;
@@ -44,13 +43,13 @@ public class TransactionMessage {
             String balance = transactionFields[2];
             String exchangeRate = transactionFields[3];
 
-            if (!(balance).equals("null") && !(exchangeRate.equals("null"))
+            if (!balance.equals("null") && !(exchangeRate.equals("null"))
                     && balance.length() > 0 && exchangeRate.length() > 0) {
 
                 parseNumericValues(transactionMessages, aTransaction, transactionFields, balance, exchangeRate);
 
             } else {
-                System.out.println("Invalid transaction message! " + aTransaction.toString());
+                System.out.println("Invalid transaction message! " + aTransaction);
             }
         }
 
@@ -74,17 +73,16 @@ public class TransactionMessage {
 
     public static void calculateTransactions(Map<String, Invoice> defaultInvoices, List<TransactionMessage> transactions) {
         Map<Invoice, List<TransactionMessage>> transactionsByInvoices = new HashMap<>();
-        int counter = 0;
 
         for (TransactionMessage transaction : transactions) {
 
             if (checkValidInvoiceNumber(defaultInvoices, transaction)) {
-                if (counter > 0 && counter % 10 == 0) {
+                if (atomic.get() > 0 && atomic.get() % 10 == 0) {
                     System.out.println("\n" + transactionsByInvoices);
                 }
 
                 separateTransactionMessagesByInvoices(defaultInvoices, transactionsByInvoices, transaction);
-                counter = atomic.incrementAndGet();
+                atomic.incrementAndGet();
 
                 Invoice invoice = defaultInvoices.get(transaction.invoiceNumber);
 

@@ -20,7 +20,7 @@ public class ExecuteFinancialTransaction {
     public static void main(String[] args) {
 
         if (args.length == 0 || !args[0].endsWith(".csv") || Character.isDigit(args[0].charAt(0))) {
-            System.out.println("Please specify input file name! E.g.: transactionMessages.csv");
+            System.out.println("Please specify the input file name! E.g.: transactionMessages.csv");
             System.exit(-1);
         }
 
