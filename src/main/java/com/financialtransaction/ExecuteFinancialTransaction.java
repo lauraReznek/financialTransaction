@@ -1,8 +1,8 @@
-package com.alvicom.financialtransaction;
+package com.financialtransaction;
 
-import com.alvicom.financialtransaction.datamodel.Invoice;
-import com.alvicom.financialtransaction.datamodel.TransactionMessage;
-import com.alvicom.financialtransaction.util.IOUtil;
+import com.financialtransaction.datamodel.Invoice;
+import com.financialtransaction.datamodel.TransactionMessage;
+import com.financialtransaction.util.IOUtil;
 
 import java.util.ArrayList;
 import java.util.List;

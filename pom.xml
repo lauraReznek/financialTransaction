@@ -30,7 +30,7 @@
                             <archive>
                                 <manifest>
                                     <mainClass>
-                                        com.alvicom.financialtransaction.ExecuteFinancialTransaction
+                                        com.financialtransaction.ExecuteFinancialTransaction
                                     </mainClass>
                                 </manifest>
                             </archive>

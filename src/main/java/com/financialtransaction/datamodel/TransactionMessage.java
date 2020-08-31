@@ -1,4 +1,4 @@
-package com.alvicom.financialtransaction.datamodel;
+package com.financialtransaction.datamodel;
 
 import java.util.*;
 import java.util.concurrent.atomic.AtomicInteger;

@@ -1,4 +1,4 @@
-package com.alvicom.financialtransaction.util;
+package com.financialtransaction.util;
 
 import java.io.IOException;
 import java.nio.file.Files;
